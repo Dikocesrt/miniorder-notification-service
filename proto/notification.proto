@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+// Mendeklarasikan path package ketika hasil generate dibentuk menjadi golang
+// "paketmu;nama_folder"
+option go_package = "ordermini-notification-service/proto;pb";
+
+package notification;
+
+// Service definition (Berisi daftar fungsi jarak jauh)
+service NotificationService {
+  rpc SendSuccessEmail (SendSuccessEmailRequest) returns (SendSuccessEmailResponse);
+}
+
+// Request DTO definition (Setara dengan JSON Request di REST API)
+message SendSuccessEmailRequest {
+  string trace_id = 1;
+  string order_id = 2;
+  string customer_email = 3;
+  int64 amount = 4;
+}
+
+// Response DTO definition (Setara dengan JSON Response di REST API)
+message SendSuccessEmailResponse {
+  bool success = 1;
+  string message = 2;
+}

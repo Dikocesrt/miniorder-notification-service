@@ -3,7 +3,7 @@ package config
 import (
 	"flag"
 	"fmt"
-	"miniorder-order-service/internal/domain"
+	"ordermini-notification-service/internal/domain"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -47,21 +47,16 @@ func GetEnvServiceProperties() (svcProperties domain.ServiceProperties) {
 
 	svcProperties = domain.ServiceProperties{
 		DebugMode:      viper.GetBool("DEBUG_MODE"),
+		ServicePort:    viper.GetInt("SERVICE_PORT"),
+		ServiceTCPPort: viper.GetInt("SERVICE_TCP_PORT"),
 		ServiceName:    viper.GetString("SERVICE_NAME"),
 		Timeout:        viper.GetDuration("TIMEOUT"),
 		PoolConnection: viper.GetInt("POOL_CONNECTION"),
-		Redis: domain.RedisConfig{
-			Host:     viper.GetString("REDIS_HOST"),
-			Password: viper.GetString("REDIS_PASSWORD"),
-			Database: viper.GetInt("REDIS_DATABASE"),
-		},
-		Database: domain.DatabaseConfig{
-			IP:          viper.GetString("DB_IP"),
-			Port:        viper.GetInt("DB_PORT"),
-			User:        viper.GetString("DB_USER"),
-			Password:    viper.GetString("DB_PASSWORD"),
-			Name:        viper.GetString("DB_NAME"),
-			DialTimeout: viper.GetDuration("DB_DIAL_TIMEOUT"),
+		SmtpConfig: domain.SmtpConfig{
+			Host:     viper.GetString("SMTP_HOST"),
+			Port:     viper.GetInt("SMTP_PORT"),
+			Username: viper.GetString("SMTP_AUTH_EMAIL"),
+			Password: viper.GetString("SMTP_AUTH_PASSWORD"),
 		},
 	}
 

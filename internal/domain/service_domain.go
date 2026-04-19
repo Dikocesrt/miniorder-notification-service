@@ -5,25 +5,18 @@ import "time"
 type (
 	ServiceProperties struct {
 		DebugMode      bool
-		ServiceName    string         `validate:"required"`
-		Timeout        time.Duration  `validate:"required"`
-		PoolConnection int            `validate:"required"`
-		Redis          RedisConfig    `validate:"required"`
-		Database       DatabaseConfig `validate:"required"`
+		ServicePort    int           `validate:"required"`
+		ServiceTCPPort int           `validate:"required"`
+		ServiceName    string        `validate:"required"`
+		Timeout        time.Duration `validate:"required"`
+		PoolConnection int           `validate:"required"`
+		SmtpConfig     SmtpConfig    `validate:"required"`
 	}
 
-	DatabaseConfig struct {
-		IP          string        `validate:"required"`
-		Port        int           `validate:"required"`
-		User        string        `validate:"required"`
-		Password    string        `validate:"required"`
-		Name        string        `validate:"required"`
-		DialTimeout time.Duration `validate:"required"`
-	}
-
-	RedisConfig struct {
+	SmtpConfig struct {
 		Host     string `validate:"required"`
-		Password string
-		Database int
+		Port     int    `validate:"required"`
+		Username string `validate:"required"`
+		Password string `validate:"required"`
 	}
 )
