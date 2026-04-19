@@ -17,6 +17,8 @@ WORKDIR /app
 
 COPY --from=builder /app/server .
 
+COPY --from=builder /app/.env* ./
+
 EXPOSE 8000
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup

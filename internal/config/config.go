@@ -15,6 +15,8 @@ func GetServiceProperties() (svcProperties domain.ServiceProperties) {
 	isLocalDev := flag.Bool("local", false, "=(true/false)")
 	flag.Parse()
 
+	viper.AutomaticEnv()
+
 	viper.AddConfigPath(".")
 	viper.SetConfigType("env")
 	if *isLocalDev {
@@ -27,10 +29,10 @@ func GetServiceProperties() (svcProperties domain.ServiceProperties) {
 		if err := viper.ReadInConfig(); err != nil {
 			panic(fmt.Errorf("error reading transaction file: %w", err))
 		}
-		viper.SetConfigFile(".env.svc")
-		if err := viper.MergeInConfig(); err != nil {
-			panic(fmt.Errorf("error merging the .env.svc file: %w", err))
-		}
+		// viper.SetConfigFile(".env.svc")
+		// if err := viper.MergeInConfig(); err != nil {
+		// 	panic(fmt.Errorf("error merging the .env.svc file: %w", err))
+		// }
 	}
 
 	svcProperties = GetEnvServiceProperties()
